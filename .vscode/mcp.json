@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "my-mcp-demo-server": {
+            "type": "stdio",
+            "command": "uv",
+            "args": [
+                "--directory",
+                "/home/lucamari/Bin/myMCPserver",
+                "run",
+                "server.py"
+            ]
+        }
+    }
+}
