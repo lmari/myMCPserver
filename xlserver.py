@@ -15,7 +15,7 @@ def create_workbook(
         wb = Workbook()
         wb.save(filename)
         wb.close()
-        return {"result": True, "message": f"File {filename} creato con successo."}
+        return {"result": True, "message": f"File {filename} creato correttamente."}
     except Exception as e:
         return {"result": False, "message": f"Problemi nella creazione del file {filename}."}
 
@@ -32,7 +32,7 @@ def write_data_in_cell(
         ws[cell] = data # type: ignore
         wb.save(filename)
         wb.close()
-        return {"result": True, "message": f"Dati scritti nel file {filename} con successo."}
+        return {"result": True, "message": f"Dati scritti nel file {filename} correttamente."}
     except Exception as e:
         return {"result": False, "message": f"Problemi nella scrittura del file {filename}."}
 
@@ -65,7 +65,7 @@ def write_data_in_range(
 
         wb.save(filename)
         wb.close()
-        return {"result": True, "message": f"Dati scritti nel file {filename} con successo."}
+        return {"result": True, "message": f"Dati scritti nel file {filename} correttamente."}
     except Exception as e:
         return {"result": False, "message": f"Problemi nella scrittura del file {filename}."}
 

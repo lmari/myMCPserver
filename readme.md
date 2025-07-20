@@ -1,54 +1,20 @@
-creato un ambiente virtuale
+## Un tutorial (preliminare ed elementare) su MCP con FastMCP v2
 
-istruzioni in https://github.com/jlowin/fastmcp e https://gofastmcp.com (per FastMCP v2)
-e in https://modelcontextprotocol.io/quickstart/server
+_Luca Mari, 20 luglio 2025_
 
-installazione:  
-`uv pip install fastmcp`
+MCP (_Model Context Protocol_) è un protocollo applicativo client-server "di alto livello", una sorta di "meta-HTTP".  
+FastMCP 2.0 è un modulo Python (https://gofastmcp.com/getting-started/welcome; https://github.com/jlowin/fastmcp) che semplifica la realizzazione di server e client MCP, e perciò -- dato lo scopo solo didattico di questo tutorial -- lo useremo qui, costruendo un server che espone alcuni endpoint per operare su file xlsx (`xlserver.py`), impiegando alcune funzioni Python (`client_tools.py`) per nascondere ulteriormente i dettagli non specificamente rilevanti, e sperimentando variamente in un notebook con funzioni di client (`xlclient.ipynb`).
 
-scrittura di `server.py`
+Per mantenere il contesto il più semplice possibile:
+* useremo un modello di linguaggio di piccole dimensioni e in esecuzione locale, per esempio Gemma3-4b oppure Qwen3-4b mediante [LM Studio](https://lmstudio.ai) (tutti liberamente scaricabili da [Hugging Face](https://huggingface.co)) (non spieghiamo qui come attivare un modello di linguaggio in locale);
+* eseguiremo il server MCP direttamente sul sistema operativo locale, invece che in remoto o all'interno di un container.
 
-esecuzione del server:  
-`fastmcp run server.py:mcp --transport sse --port 8080 --host 0.0.0.0`  
-oppure:  
-`python server.py`  
-assumendo che nel codice di `server.py` ci sia la linea:  
-`mcp.run(transport="sse", host="127.0.0.1", port=8080)`  
+Insomma, una volta installato quanto occorre, questo tutorial può essere eseguito anche disconnessi da internet. La documentazione e l'interazione saranno in italiano, per mostrare le capacità multilingue dei modelli di linguaggio anche di piccole dimensioni.
 
-esecuzione del client:  
-`python client.py`
+### Preliminari
 
-test con MCP Inspector (senza eseguire esplicitamente `server.py`: è messo in esecuzione dall'Inspector):  
-`fastmcp dev server.py`  
-e test da un browser all'indirizzo `http://127.0.0.1:6274`, indicando poi SSE come Transport Type, `http://localhost:8080/sse` come URL, e quindi connettendosi al server in esecuzione
-
-
-
-
----
-per eseguire il server usando vscode agent come client, creazione del file .vscode/mcp.json
-{
-    "servers": {
-        "my-mcp-demo-server": {
-            "type": "stdio",
-            "command": "uv",
-            "args": [
-                "--directory",
-                "/home/lucamari/Bin/myMCPserver",
-                "run",
-                "server.py"
-            ]
-        }
-    }
-}
-ed esecuzione
-
-esecuzione command line (accessibile da un client generico?):
-uv --directory /home/lucamari/Bin/myMCPserver run server.py
-
-
-
-installato openai per il client
-
-esecuzione command line:
-python client.py server.py 1
+* Installare un interprete Python.
+* Creare un ambiente virtuale Python e attivarlo.
+* Copiare nell'ambiente virtuale i file di questo repository.
+* Installare nell'ambiente virtuale i moduli `fastmcp`, `openai` (per l'accesso all'API di OpenAI, anche in locale), e `openpyxl` (per operare su file xlsx).
+* Installare quanto serve per rendere accessibile un modello di linguaggio in locale via l'API di OpenAI).
